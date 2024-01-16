@@ -4,24 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego Ahorcado</title>
+    
     <style>
-        div{
-            background-color: blue;  
-            background-image: "https://img.freepik.com/foto-gratis/textura-pared-cemento-viejo_1149-1280.jpg";
+        body {
+            background-color: grey;  
             background-size: cover; 
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        canvas {
+            margin-top: 20px;
         }
     </style>
+
+    <script>
+        alert("Bienvenido al juego de ahorcado");
+
+        const palabras = ["josue", "antonio", "hola", "lugares"];
+        let palabraOculta = "";
+        let letrasAdivinadas = [];
+
+        function inicializarJuego() {
+            palabraOculta = palabras[Math.floor(Math.random() * palabras.length)];
+            letrasAdivinadas = [];
+            dibujarAhorcado();
+            actualizarPalabra();
+        }
+
+        function dibujarAhorcado() {
+            const canvas = document.getElementById("canvas");
+            const context = canvas.getContext("2d");
+            context.clearRect(50, 50, canvas.width, canvas.height);
+        }
+
+        function actualizarPalabra() {
+            const palabraElement = document.getElementById("palabra");
+            let palabraMostrada = "";
+
+            for (let letra of palabraOculta) {
+                if (letrasAdivinadas.includes(letra)) {
+                    palabraMostrada += letra;
+                } else {
+                    palabraMostrada += "_";
+                }
+            }
+
+            palabraElement.textContent = palabraMostrada;
+        }
+
+        function adivinarLetra() {
+            const letraInput = document.getElementById("letraInput");
+            const letra = letraInput.value.toLowerCase();
+
+            if (letra.length !== 1 || !/[a-z]/.test(letra)) {
+                alert("Por favor, ingresa una letra válida.");
+                return;
+            }
+
+            if (letrasAdivinadas.includes(letra)) {
+                alert("Palabra incorrecta!  Intente otra vez.");
+                return;
+            }
+
+            letrasAdivinadas.push(letra);
+            actualizarPalabra();
+            dibujarAhorcado();
+        }
+    </script>
 </head>
 <body>
     <center>
         <h1> Ahorcado </h1> 
-    <hr>  
-    <input> Ingrese una letra </input> 
-    <script>
-        //for(int i=1; i<=12; i++){
-
-        // }
-    </script>
+        <hr>  
+        <div>
+            <label for="letraInput">Ingresa una letra: </label>
+            <input type="text" id="letraInput" maxlength="1">
+            <button onclick="adivinarLetra()">Buscar letra</button>
+        </div>
+        <div>
+            <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+        <div id="palabra"></div>
     </center>  
+    <script>
+        window.onload = inicializarJuego;
+    </script>
 </body>
 </html>
