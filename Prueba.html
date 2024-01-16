@@ -17,6 +17,18 @@
         canvas {
             margin-top: 20px;
         }
+
+        button{
+            font-size: 12px;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+
+        input{
+            font-size: 12px;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
     </style>
 
     <script>
@@ -80,8 +92,8 @@
         <hr>  
         <div>
             <label for="letraInput">Ingresa una letra: </label>
-            <input type="text" id="letraInput" maxlength="1">
-            <button onclick="adivinarLetra()">Buscar letra</button>
+            <input style="font-size: 12x; padding: 12px 12px; margin-top: 10px;" type="text" id="letraInput" maxlength="1">
+            <button style="font-size: 12px; padding: 12px 12px; margin-top: 10px;" onclick="adivinarLetra()">Buscar letra</button>
         </div>
         <div>
             <canvas id="canvas" width="500" height="500"></canvas>
